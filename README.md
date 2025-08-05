@@ -8,6 +8,7 @@ A modern, responsive React.js portfolio website that dynamically loads content f
 - **Responsive Design**: Fully responsive layout that works on all devices
 - **Interactive Navigation**: Smooth scrolling navigation with mobile-friendly hamburger menu
 - **Modern UI**: Glass-morphism design with smooth animations and hover effects
+- **Working Contact Form**: Functional email contact form with EmailJS integration
 - **Clickable Elements**: Interactive contact information, skill filters, and project cards
 - **Professional Sections**:
   - Personal Information & Contact
@@ -43,6 +44,14 @@ npm start
 
 The application will open in your browser at `http://localhost:3000`
 
+### Contact Form
+
+The contact form is fully functional and integrated with EmailJS for sending emails directly to your inbox. The form includes:
+- Real-time validation
+- Toast notifications for success/error feedback
+- Professional loading states
+- Auto-clearing after successful submission
+
 ### Building for Production
 
 ```bash
@@ -61,8 +70,7 @@ portfolio/
 │   │   ├── education.csv
 │   │   ├── projects.csv
 │   │   ├── certifications.csv
-│   │   ├── languages.csv
-│   │   └── achievements.csv
+│   │   └── languages.csv
 │   └── index.html
 ├── src/
 │   ├── components/        # React components
