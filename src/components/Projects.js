@@ -7,7 +7,7 @@ const Projects = () => {
 
   useEffect(() => {
     const loadProjectsData = async () => {
-      const data = await readCSV('/data/projects.csv');
+      const data = await readCSV('data/projects.csv');
       setProjectsData(data);
     };
 
@@ -96,5 +96,6 @@ const Projects = () => {
     </div>
   );
 };
+
 
 export default Projects; 
