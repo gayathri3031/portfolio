@@ -7,7 +7,7 @@ const Experience = () => {
 
   useEffect(() => {
     const loadExperienceData = async () => {
-      const data = await readCSV('/data/experience.csv');
+      const data = await readCSV('data/experience.csv');
       setExperienceData(data);
     };
 
