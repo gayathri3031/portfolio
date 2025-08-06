@@ -7,7 +7,7 @@ const Education = () => {
 
   useEffect(() => {
     const loadEducationData = async () => {
-      const data = await readCSV('/data/education.csv');
+      const data = await readCSV('data/education.csv');
       setEducationData(data);
     };
 
@@ -95,5 +95,6 @@ const Education = () => {
     </div>
   );
 };
+
 
 export default Education; 
