@@ -8,7 +8,7 @@ const Certifications = () => {
 
   useEffect(() => {
     const loadCertificationsData = async () => {
-      const data = await readCSV('/data/certifications.csv');
+      const data = await readCSV('data/certifications.csv');
       setCertificationsData(data);
     };
 
@@ -306,5 +306,6 @@ const Certifications = () => {
     </div>
   );
 };
+
 
 export default Certifications; 

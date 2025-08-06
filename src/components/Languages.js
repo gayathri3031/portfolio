@@ -7,7 +7,7 @@ const Languages = () => {
 
   useEffect(() => {
     const loadLanguagesData = async () => {
-      const data = await readCSV('/data/languages.csv');
+      const data = await readCSV('data/languages.csv');
       setLanguagesData(data);
     };
 
@@ -63,5 +63,6 @@ const Languages = () => {
     </div>
   );
 };
+
 
 export default Languages; 

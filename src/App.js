@@ -14,7 +14,9 @@ function App() {
   const downloadResume = () => {
     // Create a link element and trigger download
     const link = document.createElement('a');
-    link.href = '/Gayathri_Resume.pdf';
+     link.href = process.env.NODE_ENV === 'production' 
+      ? '/portfolio/Gayathri_Resume.pdf' 
+      : '/Gayathri_Resume.pdf';
     link.download = 'Gayathri_Resume.pdf';
     document.body.appendChild(link);
     link.click();
