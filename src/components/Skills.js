@@ -6,7 +6,7 @@ const Skills = () => {
 
   useEffect(() => {
     const loadSkillsData = async () => {
-      const data = await readCSV('/data/skills.csv');
+      const data = await readCSV('data/skills.csv');
       setSkillsData(data);
     };
 
