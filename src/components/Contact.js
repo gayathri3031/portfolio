@@ -7,7 +7,7 @@ const Contact = () => {
 
   useEffect(() => {
     const loadPersonalData = async () => {
-      const data = await readCSV('/data/personal.csv');
+      const data = await readCSV('data/personal.csv');
       const personalInfo = {};
       data.forEach(row => {
         personalInfo[row.field] = row.value;
