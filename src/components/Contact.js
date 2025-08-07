@@ -15,7 +15,7 @@ const Contact = () => {
 
   useEffect(() => {
     const loadPersonalData = async () => {
-      const data = await readCSV('data/personal.csv');
+      const data = await readCSV('/data/personal.csv');
       const personalInfo = {};
       data.forEach(row => {
         personalInfo[row.field] = row.value;
@@ -187,7 +187,7 @@ const Contact = () => {
         Interested in working together? Let's have a conversation about how I can contribute to your team.
       </p>
 
-      <div style={{ 
+      <div className="contact-grid" style={{ 
         display: 'grid', 
         gridTemplateColumns: '1fr 1fr', 
         gap: '30px', 
@@ -196,7 +196,7 @@ const Contact = () => {
         margin: '0 auto'
       }}>
         {/* Left Side - Contact Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <div className="contact-cards" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
           {/* Phone Card */}
           <div 
             onClick={() => handleContactClick('phone', personalData.phone)}
@@ -310,7 +310,7 @@ const Contact = () => {
         </div>
 
         {/* Right Side - Contact Form */}
-        <div style={{
+        <div className="contact-form" style={{
           background: '#fff',
           borderRadius: '12px',
           padding: '25px',
@@ -517,6 +517,93 @@ const Contact = () => {
           to {
             transform: translateX(0);
             opacity: 1;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .contact-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+            padding: 0 15px !important;
+          }
+          
+          .contact-grid > div:first-child {
+            order: 2;
+          }
+          
+          .contact-grid > div:last-child {
+            order: 1;
+          }
+          
+          .contact-cards {
+            gap: 12px !important;
+          }
+          
+          .contact-form {
+            padding: 20px !important;
+            margin-bottom: 20px;
+          }
+          
+          .contact-form h3 {
+            font-size: 1rem !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .contact-form form {
+            gap: 10px !important;
+          }
+          
+          .contact-form input,
+          .contact-form textarea {
+            padding: 10px 12px !important;
+            font-size: 0.85rem !important;
+          }
+          
+          .contact-form button {
+            padding: 12px 20px !important;
+            font-size: 0.85rem !important;
+            width: 100% !important;
+            align-self: stretch !important;
+          }
+          
+          .contact-grid h2 {
+            font-size: 1.6rem !important;
+          }
+          
+          .contact-grid p {
+            font-size: 0.9rem !important;
+            padding: 0 10px !important;
+            margin-bottom: 35px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .contact-grid {
+            padding: 0 10px !important;
+            gap: 15px !important;
+          }
+          
+          .contact-form {
+            padding: 15px !important;
+          }
+          
+          .contact-cards {
+            gap: 10px !important;
+          }
+          
+          .contact-grid h2 {
+            font-size: 1.4rem !important;
+          }
+          
+          .contact-grid p {
+            font-size: 0.85rem !important;
+            margin-bottom: 25px !important;
+          }
+          
+          .contact-form input,
+          .contact-form textarea {
+            padding: 8px 10px !important;
+            font-size: 0.8rem !important;
           }
         }
       `}</style>

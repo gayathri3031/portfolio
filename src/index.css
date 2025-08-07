@@ -296,6 +296,10 @@ code {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+  
   .section {
     padding: 40px 15px;
   }
@@ -314,6 +318,15 @@ code {
     margin-bottom: 30px;
   }
   
+  /* Navigation Mobile Improvements */
+  nav {
+    padding: 8px 0 !important;
+  }
+  
+  nav > div {
+    padding: 0 15px !important;
+  }
+  
   /* Floating Action Button Mobile Adjustments */
   .fab-mobile {
     bottom: 20px !important;
@@ -324,5 +337,25 @@ code {
   
   .fab-mobile svg {
     font-size: 1rem !important;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 10px;
+  }
+  
+  nav > div {
+    padding: 0 10px !important;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  /* Extra small mobile navigation */
+  nav {
+    padding: 6px 0 !important;
   }
 } 
