@@ -15,12 +15,23 @@ const Contact = () => {
 
   useEffect(() => {
     const loadPersonalData = async () => {
-      const data = await readCSV('/data/personal.csv');
-      const personalInfo = {};
-      data.forEach(row => {
-        personalInfo[row.field] = row.value;
-      });
-      setPersonalData(personalInfo);
+      try {
+        console.log('Loading personal data...');
+        const data = await readCSV('data/personal.csv');
+        console.log('CSV data loaded:', data);
+        
+        const personalInfo = {};
+        data.forEach(row => {
+          personalInfo[row.field] = row.value;
+        });
+        
+        console.log('Personal info processed:', personalInfo);
+        setPersonalData(personalInfo);
+      } catch (error) {
+        console.error('Error loading personal data:', error);
+        // Don't set hardcoded data, leave empty to show loading state
+        setPersonalData({});
+      }
     };
 
     loadPersonalData();
@@ -44,6 +55,12 @@ const Contact = () => {
   };
 
   const handleContactClick = (type, value) => {
+    // Check if value exists before processing
+    if (!value) {
+      console.warn(`No ${type} value available`);
+      return;
+    }
+
     switch (type) {
       case 'phone':
         window.open(`tel:${value}`);
@@ -52,7 +69,11 @@ const Contact = () => {
         window.open(`mailto:${value}`);
         break;
       case 'linkedin':
-        window.open(value.startsWith('http') ? value : `https://${value}`, '_blank');
+        // Safely check if value exists and is a string before using startsWith
+        const linkedinUrl = (value && typeof value === 'string' && value.startsWith('http')) 
+          ? value 
+          : `https://${value}`;
+        window.open(linkedinUrl, '_blank');
         break;
       default:
         break;
@@ -207,21 +228,28 @@ const Contact = () => {
               textAlign: 'center',
               boxShadow: '0 4px 20px rgba(108, 117, 125, 0.1)',
               border: '1px solid #e9ecef',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              cursor: personalData.phone ? 'pointer' : 'default',
+              transition: 'all 0.3s ease',
+              opacity: personalData.phone ? 1 : 0.6
             }}
             onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-3px)';
-              e.target.style.boxShadow = '0 6px 25px rgba(108, 117, 125, 0.15)';
+              if (personalData.phone) {
+                e.target.style.transform = 'translateY(-3px)';
+                e.target.style.boxShadow = '0 6px 25px rgba(108, 117, 125, 0.15)';
+              }
             }}
             onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0px)';
-              e.target.style.boxShadow = '0 4px 20px rgba(108, 117, 125, 0.1)';
+              if (personalData.phone) {
+                e.target.style.transform = 'translateY(0px)';
+                e.target.style.boxShadow = '0 4px 20px rgba(108, 117, 125, 0.1)';
+              }
             }}
           >
             <FaPhone style={{ fontSize: '1.2rem', color: '#6c757d', marginBottom: '10px' }} />
             <h4 style={{ fontSize: '0.85rem', fontWeight: '600', color: '#495057', marginBottom: '4px' }}>Phone</h4>
-            <span style={{ color: '#666', fontSize: '0.75rem' }}>{personalData.phone}</span>
+            <span style={{ color: '#666', fontSize: '0.75rem' }}>
+              {personalData.phone || 'Loading...'}
+            </span>
             <p style={{ color: '#999', fontSize: '0.65rem', marginTop: '8px', fontStyle: 'italic' }}>Call for immediate assistance</p>
           </div>
 
@@ -235,21 +263,28 @@ const Contact = () => {
               textAlign: 'center',
               boxShadow: '0 4px 20px rgba(108, 117, 125, 0.1)',
               border: '1px solid #e9ecef',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              cursor: personalData.email ? 'pointer' : 'default',
+              transition: 'all 0.3s ease',
+              opacity: personalData.email ? 1 : 0.6
             }}
             onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-3px)';
-              e.target.style.boxShadow = '0 6px 25px rgba(108, 117, 125, 0.15)';
+              if (personalData.email) {
+                e.target.style.transform = 'translateY(-3px)';
+                e.target.style.boxShadow = '0 6px 25px rgba(108, 117, 125, 0.15)';
+              }
             }}
             onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0px)';
-              e.target.style.boxShadow = '0 4px 20px rgba(108, 117, 125, 0.1)';
+              if (personalData.email) {
+                e.target.style.transform = 'translateY(0px)';
+                e.target.style.boxShadow = '0 4px 20px rgba(108, 117, 125, 0.1)';
+              }
             }}
           >
             <FaEnvelope style={{ fontSize: '1.2rem', color: '#6c757d', marginBottom: '10px' }} />
             <h4 style={{ fontSize: '0.85rem', fontWeight: '600', color: '#495057', marginBottom: '4px' }}>Email</h4>
-            <span style={{ color: '#666', fontSize: '0.75rem', wordBreak: 'break-word' }}>{personalData.email}</span>
+            <span style={{ color: '#666', fontSize: '0.75rem', wordBreak: 'break-word' }}>
+              {personalData.email || 'Loading...'}
+            </span>
             <p style={{ color: '#999', fontSize: '0.65rem', marginTop: '8px', fontStyle: 'italic' }}>Send detailed inquiries</p>
           </div>
 
@@ -263,21 +298,28 @@ const Contact = () => {
               textAlign: 'center',
               boxShadow: '0 4px 20px rgba(108, 117, 125, 0.1)',
               border: '1px solid #e9ecef',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              cursor: personalData.linkedin ? 'pointer' : 'default',
+              transition: 'all 0.3s ease',
+              opacity: personalData.linkedin ? 1 : 0.6
             }}
             onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-3px)';
-              e.target.style.boxShadow = '0 6px 25px rgba(108, 117, 125, 0.15)';
+              if (personalData.linkedin) {
+                e.target.style.transform = 'translateY(-3px)';
+                e.target.style.boxShadow = '0 6px 25px rgba(108, 117, 125, 0.15)';
+              }
             }}
             onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0px)';
-              e.target.style.boxShadow = '0 4px 20px rgba(108, 117, 125, 0.1)';
+              if (personalData.linkedin) {
+                e.target.style.transform = 'translateY(0px)';
+                e.target.style.boxShadow = '0 4px 20px rgba(108, 117, 125, 0.1)';
+              }
             }}
           >
             <FaLinkedin style={{ fontSize: '1.2rem', color: '#6c757d', marginBottom: '10px' }} />
             <h4 style={{ fontSize: '0.85rem', fontWeight: '600', color: '#495057', marginBottom: '4px' }}>LinkedIn</h4>
-            <span style={{ color: '#666', fontSize: '0.75rem' }}>Professional Profile</span>
+            <span style={{ color: '#666', fontSize: '0.75rem' }}>
+              {personalData.linkedin ? 'Professional Profile' : 'Loading...'}
+            </span>
             <p style={{ color: '#999', fontSize: '0.65rem', marginTop: '8px', fontStyle: 'italic' }}>Connect & network professionally</p>
           </div>
 
@@ -518,6 +560,11 @@ const Contact = () => {
             transform: translateX(0);
             opacity: 1;
           }
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
         
         @media (max-width: 768px) {
