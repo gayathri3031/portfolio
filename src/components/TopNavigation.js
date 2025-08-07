@@ -22,6 +22,8 @@ const TopNavigation = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Debug log
+    console.log('Mobile menu toggled:', !isMobileMenuOpen);
   };
 
   return (
@@ -199,23 +201,26 @@ const TopNavigation = () => {
             onClick={toggleMobileMenu}
             className="mobile-menu-btn"
             style={{
-              background: 'none',
+              background: isMobileMenuOpen ? 'rgba(102, 126, 234, 0.1)' : 'none',
               border: 'none',
-              fontSize: '1.3rem',
-              color: '#495057',
+              fontSize: '1.4rem',
+              color: isMobileMenuOpen ? '#667eea' : '#495057',
               cursor: 'pointer',
-              padding: '8px',
+              padding: '10px',
               display: 'none',
-              borderRadius: '4px',
-              transition: 'all 0.3s ease'
+              borderRadius: '6px',
+              transition: 'all 0.3s ease',
+              transform: isMobileMenuOpen ? 'rotate(90deg)' : 'rotate(0deg)'
             }}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+              e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.15)';
               e.target.style.color = '#667eea';
+              e.target.style.transform = isMobileMenuOpen ? 'rotate(90deg) scale(1.1)' : 'rotate(0deg) scale(1.1)';
             }}
             onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.color = '#495057';
+              e.target.style.backgroundColor = isMobileMenuOpen ? 'rgba(102, 126, 234, 0.1)' : 'transparent';
+              e.target.style.color = isMobileMenuOpen ? '#667eea' : '#495057';
+              e.target.style.transform = isMobileMenuOpen ? 'rotate(90deg)' : 'rotate(0deg)';
             }}
           >
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -223,58 +228,63 @@ const TopNavigation = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="mobile-nav" style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            backgroundColor: 'white',
-            borderTop: '1px solid #e9ecef',
-            boxShadow: '0 4px 20px rgba(108, 117, 125, 0.15)',
-            borderRadius: '0 0 10px 10px',
-            zIndex: 999
+        <div className="mobile-nav" style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          right: 0,
+          backgroundColor: 'white',
+          borderTop: '1px solid #e9ecef',
+          boxShadow: '0 4px 20px rgba(108, 117, 125, 0.15)',
+          borderRadius: '0 0 10px 10px',
+          zIndex: 999,
+          display: isMobileMenuOpen ? 'block' : 'none',
+          opacity: isMobileMenuOpen ? 1 : 0,
+          transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(-10px)',
+          transition: 'all 0.3s ease'
+        }}>
+          <ul style={{
+            listStyle: 'none',
+            margin: 0,
+            padding: '20px'
           }}>
-            <ul style={{
-              listStyle: 'none',
-              margin: 0,
-              padding: '20px'
-            }}>
-              {navItems.map((item, index) => (
-                <li key={index} style={{ marginBottom: '8px' }}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      fontSize: '1rem',
-                      fontWeight: '500',
-                      color: '#495057',
-                      cursor: 'pointer',
-                      width: '100%',
-                      textAlign: 'left',
-                      padding: '12px 16px',
-                      fontFamily: 'Poppins, sans-serif',
-                      transition: 'all 0.3s ease',
-                      borderRadius: '6px',
-                      display: 'block'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
-                      e.target.style.color = '#667eea';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = 'transparent';
-                      e.target.style.color = '#495057';
-                    }}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+            {navItems.map((item, index) => (
+              <li key={index} style={{ marginBottom: '4px' }}>
+                <button
+                  onClick={() => scrollToSection(item.id)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    fontSize: '1rem',
+                    fontWeight: '500',
+                    color: '#495057',
+                    cursor: 'pointer',
+                    width: '100%',
+                    textAlign: 'left',
+                    padding: '14px 16px',
+                    fontFamily: 'Poppins, sans-serif',
+                    transition: 'all 0.3s ease',
+                    borderRadius: '8px',
+                    display: 'block',
+                    borderBottom: index < navItems.length - 1 ? '1px solid rgba(233, 236, 239, 0.5)' : 'none'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+                    e.target.style.color = '#667eea';
+                    e.target.style.transform = 'translateX(5px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'transparent';
+                    e.target.style.color = '#495057';
+                    e.target.style.transform = 'translateX(0)';
+                  }}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
 
       {/* CSS for responsive design */}
