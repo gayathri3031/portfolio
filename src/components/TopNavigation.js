@@ -100,28 +100,51 @@ const TopNavigation = () => {
                 maskComposite: 'exclude'
               }} />
               
-              {/* Stylish G Letter */}
-              <div style={{
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                          {/* Stylish G Letter */}
+            <div style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <span className="logo-letter" style={{
+                fontSize: '1.3rem',
+                fontWeight: '800',
+                fontFamily: 'Poppins, sans-serif',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                letterSpacing: '0px',
+                lineHeight: '1',
+                position: 'relative'
               }}>
-                <span className="logo-letter" style={{
-                  fontSize: '1.3rem',
-                  fontWeight: '800',
-                  fontFamily: 'Poppins, sans-serif',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  letterSpacing: '0px',
-                  lineHeight: '1',
-                  position: 'relative'
-                }}>
-                  G
-                </span>
-              </div>
+                G
+              </span>
+            </div>
+            
+            {/* Orbiting Dots */}
+            <div className="orbit-dot-1" style={{
+              position: 'absolute',
+              top: '8px',
+              right: '8px',
+              width: '4px',
+              height: '4px',
+              background: 'linear-gradient(45deg, #f093fb, #667eea)',
+              borderRadius: '50%',
+              opacity: 0.8
+            }} />
+            
+            <div className="orbit-dot-2" style={{
+              position: 'absolute',
+              bottom: '6px',
+              left: '6px',
+              width: '3px',
+              height: '3px',
+              background: 'linear-gradient(45deg, #667eea, #764ba2)',
+              borderRadius: '50%',
+              opacity: 0.6
+            }} />
             </div>
             
             {/* Brand Text */}
@@ -289,6 +312,32 @@ const TopNavigation = () => {
 
       {/* CSS for responsive design */}
       <style jsx="true">{`
+        @keyframes orbit1 {
+          0% {
+            transform: rotate(0deg) translateX(20px) rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg) translateX(20px) rotate(-360deg);
+          }
+        }
+        
+        @keyframes orbit2 {
+          0% {
+            transform: rotate(180deg) translateX(18px) rotate(-180deg);
+          }
+          100% {
+            transform: rotate(540deg) translateX(18px) rotate(-540deg);
+          }
+        }
+        
+        .orbit-dot-1 {
+          animation: orbit1 4s linear infinite;
+        }
+        
+        .orbit-dot-2 {
+          animation: orbit2 4s linear infinite;
+        }
+        
         @media (max-width: 768px) {
           .nav-container {
             padding: 0 15px !important;
@@ -327,6 +376,14 @@ const TopNavigation = () => {
           
           .mobile-menu-btn {
             display: block !important;
+          }
+          
+          .orbit-dot-1 {
+            animation: orbit1 4s linear infinite;
+          }
+          
+          .orbit-dot-2 {
+            animation: orbit2 4s linear infinite;
           }
         }
         
