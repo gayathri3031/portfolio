@@ -1,5 +1,5 @@
 title,technologies,description,type,status
-Qualcomm Car to Cloud,"AWS, Spring Framework, Microservices","Real-time IOT data transfer development, ensuring secure and scalable vehicle-to-cloud communication.",Professional Project,Ongoing
+Qualcomm Car to Cloud,"AWS/GCP, Spring Framework, Microservices, DB","Real-time IOT data transfer development, ensuring secure and scalable vehicle-to-cloud communication.",Professional Project,Ongoing
 SecureBank,"Java, Spring Boot, MySQL, HTML/CSS, JS","A comprehensive banking application with customer management, account operations, and transaction processing with real-time updates.",Self Project,Completed
 Portfolio Website,"React, JavaScript, HTML/CSS","A personal portfolio website showcasing skills, projects, and professional experience with modern UI/UX design.",Self Project,Completed
 Storm Prediction Dashboard,"Python, HTML","To predict the upcoming storms in a particular state or district.",College Project,Completed
