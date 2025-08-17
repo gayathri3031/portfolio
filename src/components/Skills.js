@@ -3,7 +3,7 @@ import { readCSV } from '../utils/csvReader';
 import { 
   FaJava, FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, 
   FaAws, FaDatabase, FaServer, FaCode, FaMicrochip,
-  FaCloud, FaTools
+  FaCloud
 } from 'react-icons/fa';
 import { 
   SiSpring, SiMongodb, SiPostgresql, SiJunit5,
