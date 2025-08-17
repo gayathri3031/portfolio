@@ -4,15 +4,22 @@ import { readCSV } from '../utils/csvReader';
 
 const Projects = () => {
   const [projectsData, setProjectsData] = useState([]);
+  const [dataVersion, setDataVersion] = useState(0); // Add version state
 
   useEffect(() => {
     const loadProjectsData = async () => {
-      const data = await readCSV('data/projects.csv');
-      setProjectsData(data);
+      try {
+        const data = await readCSV('/data/projects.csv');
+        console.log('Loaded projects data:', data); // Add logging
+        setProjectsData(data);
+        setDataVersion(prev => prev + 1); // Increment version on successful load
+      } catch (error) {
+        console.error('Failed to load projects:', error);
+      }
     };
 
     loadProjectsData();
-  }, []);
+  }, []); // Dependencies array remains empty
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -28,19 +35,21 @@ const Projects = () => {
   const getTypeColor = (type) => {
     switch (type) {
       case 'Professional Project':
-        return '#3b82f6';
+        return '#3b82f6';  // Blue
       case 'College Project':
-        return '#8b5cf6';
+        return '#8b5cf6';  // Purple
+      case 'Self Project':
+        return '#ec4899';  // Pink
       default:
-        return '#667eea';
+        return '#667eea';  // Blue-gray
     }
   };
 
   return (
     <div>
-      <div className="grid grid-2">
+      <div className="grid grid-2" key={dataVersion}> {/* Add key for force re-render */}
         {projectsData.map((project, index) => (
-          <div key={index} className="card clickable">
+          <div key={`${index}-${dataVersion}`} className="card clickable"> {/* Update key to include version */}
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
               <div style={{ marginRight: '12px', fontSize: '1.2rem' }}>
                 {getStatusIcon(project.status)}
@@ -96,6 +105,5 @@ const Projects = () => {
     </div>
   );
 };
-
 
 export default Projects; 
