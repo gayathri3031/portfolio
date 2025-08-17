@@ -9,7 +9,7 @@ const Projects = () => {
   useEffect(() => {
     const loadProjectsData = async () => {
       try {
-        const data = await readCSV('/data/projects.csv');
+        const data = await readCSV('data/projects.csv');
         console.log('Loaded projects data:', data); // Add logging
         setProjectsData(data);
         setDataVersion(prev => prev + 1); // Increment version on successful load
@@ -107,3 +107,4 @@ const Projects = () => {
 };
 
 export default Projects; 
+
