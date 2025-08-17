@@ -17,7 +17,7 @@ const Skills = () => {
   useEffect(() => {
     const loadSkillsData = async () => {
       try {
-        const data = await readCSV('/data/skills.csv');
+        const data = await readCSV('data/skills.csv');
         setSkillsData(data);
       } catch (error) {
         console.error('Failed to load skills:', error);
